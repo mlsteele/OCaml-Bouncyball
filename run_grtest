@@ -1,2 +1,2 @@
 #!/bin/bash
-ocamlc graphics.cma $1.ml -o $1 && ./$1
+ocamlc graphics.cma $1.ml -o build/$1 && ./build/$1
