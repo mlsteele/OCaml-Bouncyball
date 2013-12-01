@@ -4,16 +4,23 @@ Random.self_init ();;
 Graphics.open_graph " 640x480";;
 
 (* bouncyball state stored as (y, yvel) *)
-let rec bouncyball x =
-  match x with
-  | 0 -> (400.0, 0.0)
-  | _ -> let (y, yvel) = bouncyball (x-1) in
-    if (y < 0.0) then (0.0, -0.7 *. yvel)
-    else (y +. yvel, yvel -. 0.1);;
+let make_ball y_init yvel_init =
+  let rec bouncyball x =
+    match x with
+    | 0 -> (y_init, yvel_init)
+    | _ -> let (y, yvel) = bouncyball (x-1) in
+      if (y < 0.0) then (0.0, -0.7 *. yvel)
+      else (y +. yvel, yvel -. 0.1)
+  in bouncyball;;
+
+let ball1 = make_ball 400.0 0.0;;
+let ball2 = make_ball 300.0 0.0;;
+let ball3 = make_ball 300.0 4.0;;
 
 for x = 0 to 640 do
-  let y = fst (bouncyball x) in
-  Graphics.plot x (int_of_float y)
+  Graphics.plot x (int_of_float (fst (ball1 x)));
+  Graphics.plot x (int_of_float (fst (ball2 x)));
+  Graphics.plot x (int_of_float (fst (ball3 x)));
 done;;
 
 read_line ();;
