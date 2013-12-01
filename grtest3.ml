@@ -4,10 +4,11 @@ Random.self_init ();;
 Graphics.open_graph " 640x480";;
 
 (* bouncyball state stored as (y, yvel) *)
-let make_ball y_init yvel_init =
+let make_ball y yvel =
+  let initial_state = (y, yvel) in
   let rec bouncyball x =
     match x with
-    | 0 -> (y_init, yvel_init)
+    | 0 -> initial_state
     | _ -> let (y, yvel) = bouncyball (x-1) in
       if (y < 0.0) then (0.0, -0.7 *. yvel)
       else (y +. yvel, yvel -. 0.1)
