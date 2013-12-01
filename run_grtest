@@ -1,0 +1,2 @@
+#!/bin/bash
+ocamlc graphics.cma $1.ml -o $1 && ./$1
