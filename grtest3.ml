@@ -6,12 +6,12 @@ Graphics.open_graph " 640x480";;
 (* bouncyball state stored as (y, yvel) *)
 let rec bouncyball x =
   match x with
-  | 0 -> (200, 0)
+  | 0 -> (400.0, 0.0)
   | _ -> let (y, yvel) = bouncyball (x-1) in
-    (y + yvel, yvel - 1);;
+    (y +. yvel, yvel -. 0.1);;
 
 for x = 0 to 640 do
-  Graphics.plot x (fst (bouncyball x))
+  Graphics.plot x (int_of_float (fst (bouncyball x)))
 done;;
 
 read_line ();;
